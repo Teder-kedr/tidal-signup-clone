@@ -5,6 +5,10 @@ const confirmPasswordLabel = document.querySelector('label[for="confirm-password
 const username = document.querySelector('#username');
 const usernameLabel = document.querySelector('label[for="username"]');
 
+const textFields = document.querySelectorAll('#password, #confirm-password, #username');
+
+const signupButton = document.querySelector('button[type="submit"]');
+
 const usernameRegex = /^[a-zA-Z]+[a-zA-Z0-9-_]*$/;
 
 const isValid = function (input, regex) {
@@ -83,3 +87,44 @@ username.addEventListener('input', () => {
     }
 });
 
+//**************** SIGN UP BUTTON TOGGLING *****************
+function checkForm() {
+    function checkNoErrors(obj) {
+        if (obj.classList.contains('error')) {
+            return false
+        } return true
+    }
+    function checkNotEmpty(obj) {
+        if (obj.value.length === 0) {
+            return false
+        } return true
+    }
+    if (checkNotEmpty(password)
+        && checkNotEmpty(confirmPassword)
+        && checkNotEmpty(username)
+        && !(password.value.length < 6)
+        && confirmPassword.value === password.value
+        && !(username.value.length < 4)
+        && isValid(username.value, usernameRegex)) {
+        enableSignupButton();
+    } else {
+        disableSignupButton();
+    }
+}
+
+function disableSignupButton() {
+    signupButton.classList.add('disabled')
+    signupButton.disabled = true;
+}
+
+function enableSignupButton() {
+    signupButton.classList.remove('disabled')
+    signupButton.disabled = false;
+}
+
+checkForm();
+textFields.forEach(field => {
+    field.addEventListener('input', () => {
+        checkForm();
+    });
+});

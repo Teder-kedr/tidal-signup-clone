@@ -280,6 +280,11 @@ input.error {
     color: rgb(255, 50, 50);
 }
 
+button.disabled {
+    background-color: #666;
+    cursor: unset;
+}
+
 /********* MEDIA QUERY *********/
 
 @media (max-width: 850px) {
