@@ -11,7 +11,55 @@ const isValid = function (input, regex) {
     return regex.test(input);
 };
 
-//Change to ERROR
+let isUnchanged = true;
+
+//**************** PASSWORD Change to ERROR ****************
+password.addEventListener('change', () => {
+    if (password.value.length < 6 && password.value.length !== 0) {
+        password.classList.add('error');
+        passwordLabel.classList.add('error-label');
+        passwordLabel.textContent = 'Password too short (minimum 6 characters)';
+    }
+});
+
+//**************** PASSWORD Change to normal ****************
+password.addEventListener('input', () => {
+    if (!(password.value.length < 6 && password.value.length !== 0)) {
+        password.classList.remove('error');
+        passwordLabel.classList.remove('error-label');
+        passwordLabel.textContent = 'Create your password';
+    }
+});
+
+//**************** CONFIRM PASSWORD toggle ****************
+function activateToggleConfirmPassword() {
+    toggleConfirmPassword();
+    confirmPassword.addEventListener('input', () => {
+        toggleConfirmPassword();
+    });
+    password.addEventListener('input', () => {
+        toggleConfirmPassword();
+    });
+}
+function toggleConfirmPassword() {
+    if (confirmPassword.value !== password.value) {
+        confirmPassword.classList.add('error');
+        confirmPasswordLabel.classList.add('error-label');
+        confirmPasswordLabel.textContent = 'The passwords do not match';
+    } else {
+        confirmPassword.classList.remove('error');
+        confirmPasswordLabel.classList.remove('error-label');
+        confirmPasswordLabel.textContent = 'Confirm your password';
+    }
+}
+confirmPassword.addEventListener('change', () => {
+    if (isUnchanged) {
+        isUnchanged = false;
+        activateToggleConfirmPassword();
+    }
+});
+
+//**************** USERNAME Change to ERROR ****************
 username.addEventListener('change', () => {
     if (username.value.length < 4 && username.value.length !== 0
         || !(isValid(username.value, usernameRegex)) && username.value.length !== 0) {
@@ -25,7 +73,7 @@ username.addEventListener('change', () => {
     }
 });
 
-//Change to NORMAL
+//**************** USERNAME Change to normal ****************
 username.addEventListener('input', () => {
     if (!(username.value.length < 4 && username.value.length !== 0
         || !(isValid(username.value, usernameRegex)) && username.value.length !== 0)) {
