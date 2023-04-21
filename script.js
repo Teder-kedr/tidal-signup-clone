@@ -7,6 +7,9 @@ const usernameLabel = document.querySelector('label[for="username"]');
 
 const textFields = document.querySelectorAll('#password, #confirm-password, #username');
 
+const dobSelectors = document.querySelectorAll('#dob-picker select');
+// console.log(dobSelectors);
+
 const signupButton = document.querySelector('button[type="submit"]');
 
 const usernameRegex = /^[a-zA-Z]+[a-zA-Z0-9-_]*$/;
@@ -86,6 +89,8 @@ username.addEventListener('input', () => {
         usernameLabel.classList.remove('error-label');
     }
 });
+
+
 
 //**************** SIGN UP BUTTON TOGGLING *****************
 function checkForm() {

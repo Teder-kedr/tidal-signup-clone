@@ -243,7 +243,7 @@ footer {
     font-weight: 600;
     color: black;
     border: 0;
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(176, 176, 176);
     border: 1px solid var(--clr-grey-text);
     border-radius: 5px;
 
@@ -307,5 +307,21 @@ button.disabled {
 
     main>* {
         margin: 1rem 0.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-links {
+        order: 2;
+    }
+
+    .footer-text {
+        order: 1;
     }
 }
